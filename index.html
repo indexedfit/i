@@ -1,285 +1,302 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>indexed.fit</title>
-  <meta name="theme-color" content="#ffffff">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Source Code Pro", monospace;
-      font-size: 14px;
-      line-height: 1.6;
-      color: #333;
-      background: #fafafa;
-      min-height: 100vh;
-      padding: 20px;
-    }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>indexed.fit</title>
+        <meta name="theme-color" content="#ffffff" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
 
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: #1a1a1a;
-        color: #e0e0e0;
-      }
-      
-      .container {
-        background: #2a2a2a;
-        border-color: #404040;
-      }
-      
-      .about-content {
-        background: #2a2a2a;
-        border-color: #404040;
-        color: #aaa;
-      }
-    }
+            body {
+                font-family:
+                    "SF Mono", "Monaco", "Inconsolata", "Roboto Mono",
+                    "Source Code Pro", monospace;
+                font-size: 14px;
+                line-height: 1.6;
+                color: #333;
+                background: #fafafa;
+                min-height: 100vh;
+                padding: 20px;
+            }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 40px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
+            @media (prefers-color-scheme: dark) {
+                body {
+                    background: #1a1a1a;
+                    color: #e0e0e0;
+                }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #eee;
-    }
+                .container {
+                    background: #2a2a2a;
+                    border-color: #404040;
+                }
 
-    .logo {
-      font-size: 18px;
-      font-weight: 600;
-      color: #333;
-    }
+                .about-content {
+                    background: #2a2a2a;
+                    border-color: #404040;
+                    color: #aaa;
+                }
+            }
 
-    .logo a {
-      color: inherit;
-      text-decoration: none;
-    }
+            .container {
+                max-width: 900px;
+                margin: 0 auto;
+                background: #fff;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                padding: 40px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            }
 
-    .logo a:hover {
-      text-decoration: underline;
-    }
+            .header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 40px;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #eee;
+            }
 
-    .nav {
-      font-size: 13px;
-    }
+            .logo {
+                font-size: 18px;
+                font-weight: 600;
+                color: #333;
+            }
 
-    .nav label {
-      color: #666;
-      cursor: pointer;
-    }
+            .logo a {
+                color: inherit;
+                text-decoration: none;
+            }
 
-    .nav label:hover {
-      color: #333;
-    }
+            .logo a:hover {
+                text-decoration: underline;
+            }
 
-    /* CSS-only toggle */
-    #about-toggle {
-      display: none;
-    }
+            .nav {
+                font-size: 13px;
+            }
 
-    #about-toggle:checked ~ .main-content .about-section {
-      display: block;
-    }
+            .nav label {
+                color: #666;
+                cursor: pointer;
+            }
 
-    #about-toggle:checked ~ .main-content .links-section {
-      display: none;
-    }
+            .nav label:hover {
+                color: #333;
+            }
 
-    .main-content {
-      max-width: 600px;
-    }
+            /* CSS-only toggle */
+            #about-toggle {
+                display: none;
+            }
 
-    .links-section {
-      margin-bottom: 20px;
-    }
+            #about-toggle:checked ~ .main-content .about-section {
+                display: block;
+            }
 
-    .links-list {
-      list-style: none;
-      padding: 0;
-      font-size: 16px;
-      line-height: 2.2;
-    }
+            #about-toggle:checked ~ .main-content .links-section {
+                display: none;
+            }
 
-    .links-list li {
-      margin-bottom: 4px;
-      padding: 2px 0;
-    }
+            .main-content {
+                max-width: 600px;
+            }
 
-    .links-list li:before {
-      content: "→ ";
-      color: #666;
-      margin-right: 4px;
-    }
+            .links-section {
+                margin-bottom: 20px;
+            }
 
-    .links-list a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
+            .links-list {
+                list-style: none;
+                padding: 0;
+                font-size: 16px;
+                line-height: 2.2;
+            }
 
-    .links-list a:hover {
-      color: #004499;
-    }
+            .links-list li {
+                margin-bottom: 4px;
+                padding: 2px 0;
+            }
 
+            .links-list li:before {
+                content: "→ ";
+                color: #666;
+                margin-right: 4px;
+            }
 
-    .about-section {
-      display: none;
-    }
+            .links-list a {
+                color: #0066cc;
+                text-decoration: underline;
+            }
 
-    .about-section.active {
-      display: block;
-    }
+            .links-list a:hover {
+                color: #004499;
+            }
 
-    .about-content {
-      padding: 24px;
-      background: #f8f8f8;
-      border: 1px solid #eee;
-      border-radius: 3px;
-      font-size: 13px;
-      line-height: 1.6;
-    }
+            .about-section {
+                display: none;
+            }
 
-    .about-content h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      color: #333;
-    }
+            .about-section.active {
+                display: block;
+            }
 
-    .about-content p {
-      margin-bottom: 12px;
-    }
+            .about-content {
+                padding: 24px;
+                background: #f8f8f8;
+                border: 1px solid #eee;
+                border-radius: 3px;
+                font-size: 13px;
+                line-height: 1.6;
+            }
 
-    .close-about {
-      background: none;
-      border: none;
-      color: #666;
-      cursor: pointer;
-      font-size: 12px;
-      float: right;
-      padding: 4px 8px;
-    }
+            .about-content h3 {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 12px;
+                color: #333;
+            }
 
-    .close-about:hover {
-      color: #333;
-    }
+            .about-content p {
+                margin-bottom: 12px;
+            }
 
-    @media (prefers-color-scheme: dark) {
-      .header {
-        border-color: #404040;
-      }
-      
-      .logo {
-        color: #e0e0e0;
-      }
-      
-      .logo a {
-        color: inherit;
-      }
-      
-      .links-list li:before {
-        color: #aaa;
-      }
-      
-      .nav label {
-        color: #aaa;
-        cursor: pointer;
-      }
-      
-      .nav label:hover {
-        color: #e0e0e0;
-      }
-      
-      .links-list a {
-        color: #66aaff;
-      }
-      
-      .links-list a:hover {
-        color: #88ccff;
-      }
-      
-      .link-description {
-        color: #aaa;
-      }
-      
-      .about-content {
-        background: #2a2a2a;
-        border-color: #404040;
-        color: #aaa;
-      }
-      
-      .about-content h3 {
-        color: #e0e0e0;
-      }
-      
-      .close-about {
-        color: #aaa;
-      }
-      
-      .close-about:hover {
-        color: #e0e0e0;
-      }
-    }
+            .close-about {
+                background: none;
+                border: none;
+                color: #666;
+                cursor: pointer;
+                font-size: 12px;
+                float: right;
+                padding: 4px 8px;
+            }
 
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-      body {
-        padding: 12px;
-      }
-      
-      .container {
-        padding: 24px;
-      }
+            .close-about:hover {
+                color: #333;
+            }
 
-      .header {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <input type="checkbox" id="about-toggle">
-    <header class="header">
-      <div class="logo">[i] <a href="/">indexed.fit</a></div>
-      <nav class="nav">
-        <label for="about-toggle">About</label>
-      </nav>
-    </header>
+            @media (prefers-color-scheme: dark) {
+                .header {
+                    border-color: #404040;
+                }
 
-    <main class="main-content">
-      <section class="about-section" id="about-section">
-        <div class="about-content">
-          <p>A curated collection [redacted].</p>
-          <p>Privacy by design, not by accident.</p>
+                .logo {
+                    color: #e0e0e0;
+                }
+
+                .logo a {
+                    color: inherit;
+                }
+
+                .links-list li:before {
+                    color: #aaa;
+                }
+
+                .nav label {
+                    color: #aaa;
+                    cursor: pointer;
+                }
+
+                .nav label:hover {
+                    color: #e0e0e0;
+                }
+
+                .links-list a {
+                    color: #66aaff;
+                }
+
+                .links-list a:hover {
+                    color: #88ccff;
+                }
+
+                .link-description {
+                    color: #aaa;
+                }
+
+                .about-content {
+                    background: #2a2a2a;
+                    border-color: #404040;
+                    color: #aaa;
+                }
+
+                .about-content h3 {
+                    color: #e0e0e0;
+                }
+
+                .close-about {
+                    color: #aaa;
+                }
+
+                .close-about:hover {
+                    color: #e0e0e0;
+                }
+            }
+
+            /* Mobile responsiveness */
+            @media (max-width: 768px) {
+                body {
+                    padding: 12px;
+                }
+
+                .container {
+                    padding: 24px;
+                }
+
+                .header {
+                    flex-direction: column;
+                    gap: 12px;
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <input type="checkbox" id="about-toggle" />
+            <header class="header">
+                <div class="logo">[i] <a href="/">indexed.fit</a></div>
+                <nav class="nav">
+                    <label for="about-toggle">About</label>
+                </nav>
+            </header>
+
+            <main class="main-content">
+                <section class="about-section" id="about-section">
+                    <div class="about-content">
+                        <p>A curated collection [redacted].</p>
+                        <p>Privacy by design, not by accident.</p>
+                    </div>
+                </section>
+
+                <section class="links-section" id="links-section">
+                    <ul class="links-list">
+                        <li>
+                            <a href="https://mappu.fit" target="_blank"
+                                >mappu.fit</a
+                            >
+                        </li>
+                        <li>
+                            <a href="https://picc.fit" target="_blank"
+                                >picc.fit</a
+                            >
+                        </li>
+                        <li>
+                            <a href="https://tunes.fit" target="_blank"
+                                >tunes.fit</a
+                            >
+                        </li>
+                        <li>
+                            <a href="https://redacted.fit" target="_blank"
+                                >redacted.fit</a
+                            >
+                        </li>
+                    </ul>
+                </section>
+            </main>
         </div>
-      </section>
-
-      <section class="links-section" id="links-section">
-        <ul class="links-list">
-          <li><a href="https://redacted.fit" target="_blank">redacted.fit</a></li>
-	  <li><a href="https://picc.fit" target="_blank">picc.fit</a></li>
-          <li><a href="https://tunes.fit" target="_blank">tunes.fit</a></li>
-        </ul>
-      </section>
-    </main>
-  </div>
-
-</body>
+    </body>
 </html>
